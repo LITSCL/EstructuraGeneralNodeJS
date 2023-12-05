@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('includes/head_styles.ejs'); %>
+    <%- include('includes/head_scripts.ejs'); %>
+</head>
+<body>
+    <%- include('includes/header.ejs'); %>
+    <h1>Iniciar sesión</h1>	
+	<form action="<%=url%>/usuario/login" method="POST">
+		<table>
+			<tr>
+				<td>Rut</td>
+				<td><input type="text" name="rut" required/></td>
+			</tr>
+			<tr>
+				<td>Contraseña</td>
+				<td><input type="password" name="clave" required/></td>
+			</tr>
+		</table>
+		<button type="submit">Login</button>
+	</form>
+    <% 
+    if (sesion.errorLogin) {
+    %>
+        <strong class="alerta-roja"><%=sesion.errorLogin%></strong>
+    <%
+    }
+    %>
+
+<%
+delete sesion.errorLogin;
+%>
+</body>
+</html>

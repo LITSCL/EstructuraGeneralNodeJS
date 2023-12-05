@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('includes/head_styles.ejs'); %>
+    <%- include('includes/head_scripts.ejs'); %>
+</head>
+<body>
+    <%- include('includes/header.ejs'); %>
+    <h1>Estas en Crear Usuario</h1>
+	<form action="<%=url%>/usuario/save" method="POST">
+		<table border="5px">
+			<tr>
+				<td>Rut</td>
+				<td><input type="text" name="rut" placeholder="19.757.106-3" required/></td>
+			</tr>
+			<tr>
+				<td>Nombre</td>
+				<td><input type="text" name="nombre" required/></td>
+			</tr>
+			<tr>
+				<td>Apellido</td>
+				<td><input type="text" name="apellido" required/></td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td><input type="text" name="email" required/></td>
+			</tr>
+			<tr>
+				<td>Clave</td>
+				<td><input type="password" name="clave" required/></td>
+			</tr>
+			<tr>
+				<td>Tipo</td>
+				<td><input type="text" name="tipo" required/></td>
+			</tr>
+		</table>
+		<button type="submit">Crear</button>
+	</form>
+    <% 
+    if (sesion.crearUsuario == "Exitoso") {
+    %>
+        <strong class="alerta-verde">Usuario creado correctamente</strong>
+    <%
+    }
+    if (sesion.crearUsuario == "Fallido") {
+    %>
+        <strong class="alerta-roja">Error al crear el usuario</strong>
+    <%
+    }
+    %>
+
+	<%
+	if (sesion.crearUsuario == "Fallido" && sesion.errores) {
+	%>
+		<div class="listado-errores">
+			<ul>	
+			<%
+			sesion.errores.forEach(function(error) {
+			%>
+				<li><%=error%></li>
+			<%
+			});
+			%>
+			</ul>
+		</div>
+	<%
+	}
+	%>
+
+<%
+delete sesion.crearUsuario; //Borrando la sesión.
+delete sesion.errores; //Borrando la sesión.
+%>
+</body>
+</html>

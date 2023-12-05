@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('includes/head_styles.ejs'); %>
+    <%- include('includes/head_scripts.ejs'); %>
+</head>
+<body>
+    <%- include('includes/header.ejs'); %>
+    <h1>Estas en Crear Categoria</h1>
+    <form action="<%=url%>/categoria/save" method="POST">
+        <table border="5px">
+            <tr>
+                <td>Nombre</td>
+                <td><input type="text" name="nombre" required/></td>
+            </tr>
+        </table>
+        <button type="submit">Crear</button>
+    </form>
+    <% 
+    if (sesion.crearCategoria == "Exitoso") {
+    %>
+        <strong class="alerta-verde">Categoria creada correctamente</strong>
+    <%
+    }
+    if (sesion.crearCategoria == "Fallido") {
+    %>
+        <strong class="alerta-roja">Error al crear la categoria</strong>
+    <%
+    }
+    %>
+
+<%
+delete sesion.crearCategoria; //Borrando la sesión.
+%>
+</body>
+</html>

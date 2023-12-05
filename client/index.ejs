@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('includes/head_styles.ejs'); %>
+    <%- include('includes/head_scripts.ejs'); %>
+</head>
+<body>
+    <%- include('includes/header.ejs'); %>
+    <h1>Estas en Index (Index)</h1>
+    <% 
+    if (typeof sesion.usuario != "undefined" && sesion.usuario.tipo == "Administrador") {
+    %>
+        <br><h1>Bienvenido Administrador</h1>
+        <a href="<%=url%>/usuario/logout">Cerrar Sesión</a>
+    <%
+    }
+    else if (typeof sesion.usuario != "undefined" && sesion.usuario.tipo == "Cliente") {
+    %>
+        <br><h1>Bienvenido Cliente</h1>
+        <a href="<%=url%>/usuario/logout">Cerrar Sesión</a>
+    <%
+    }
+    else {
+    %>
+        <br><h1>No hay sesiones activas</h1>
+    <%
+    }
+    %>
+</body>
+</html>
+
